@@ -1,16 +1,11 @@
  
  
 let  public =document.getElementById("public");
-let dateSensor=[];
-let promedio=0;
-let maximo=0;
-let minimo=0;
-let deltaT=0;
-let dispersion=0;
-let incertidumbre=0;
+
 let tooltipchecked=true;
 let channelID=document.getElementById("channelId")
 let apiKey=document.getElementById("ApiKey") ;
+ 
 if(localStorage.getItem("channelId")==null)
 channelId.value="";
 else{
@@ -54,10 +49,22 @@ channelID.addEventListener("input",function(e){
  
 
 function login(){
-   localStorage.setItem("channelId",channelId.value)
-   localStorage.setItem("apiKey",apiKey.value)
-   window.location.href="./date.html"
- 
-}
+  
+ fetch(`https://api.thingspeak.com/channels/${channelId.value}/status/last.json?api_key=${apiKey.value}`)
+  .then(response => {
+   if (!response.ok) throw Error(response.statusText);
+      return response.json();
+  })
+  .then(data => {
+    if(data==-1){
+      console.log(data)
+      swal("Oops!", "ID or KEY  wrong!", "error");
+   }else{
+      localStorage.setItem("channelId",channelId.value)
+      localStorage.setItem("apiKey",apiKey.value)
+     window.location.href="./date.html"
 
- 
+   }
+  
+  });
+}
