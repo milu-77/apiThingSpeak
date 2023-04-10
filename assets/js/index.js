@@ -21,9 +21,9 @@ else{
  
 public.addEventListener("click",function(){ 
    if(public.checked ==true){
-      apiKey.className=" mb-3 pb-2 d-none";
+      apiKey.className=" form-control d-none";
    }else{
-      apiKey.className="mb-3 pb-2";
+      apiKey.className="form-control";
    }
  
 
