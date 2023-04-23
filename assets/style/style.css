@@ -2,10 +2,12 @@ body {
   font-family: "Raleway", sans-serif;
   margin-left: auto;
   margin-right: auto;
-   background-color: #f7f7ff;
-}
+ }
 .card {
+ }
+.card-body {
   background-color: #2f7eb2;
+
 }
 .nav-tabs .nav-link{
   background-color: #2f7eb2;
