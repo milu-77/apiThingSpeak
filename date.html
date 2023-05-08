@@ -12,7 +12,7 @@
       href="./assets/img/faviconV2.png"
       type="image/x-icon"
     />
-    <title>API - ThingSpeak</title>
+    <title>Date - ThingSpeak</title>
 
     <!-- Bootstrap CSS v5.2.1 -->
     <link
@@ -29,7 +29,20 @@
   </head>
 
   <body>
-    <header class="container-fluid mb-3">
+    <header class="container-fluid mb-3 d-flex   ">
+      <div class="container">
+        <ul class="nav justify-content-start">
+          <li class="nav-item p-2">
+            <img src="./assets/img/logo..png" alt="" />
+          </li>
+          <li class="nav-item p-2">
+            <a class="nav-link" href="./report.html">Report</a>
+          </li>
+
+           
+          
+        </ul>
+      </div>
       <div class="container">
         <ul class="nav justify-content-end">
           <li class="nav-item p-2">
@@ -41,52 +54,24 @@
             <a class="nav-link" href="#"><i class="bi bi-envelope-fill"></i></a>
           </li>
 
-          <li class="nav-item p-2" id="title"></li>
+          <li class="nav-item p-2" id="title">
+          
+          </li>
+          
         </ul>
       </div>
     </header>
     <main>
       <div class="container shadow">
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-          <div class="col" id="sensor1">
-             
-          </div>
-          <div class="col" id="sensor2">
-           
-          </div>
-          <div class="col" id="sensor3">
-            <div>
-              <canvas id="myChart" width="200" height = "100"></canvas>
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-          </div>
-           
-          
-          <div class="col" id="sensor4">
-           
-          </div>
-          <div class="col" id="sensor5">
-           
-          </div>
-          <div class="col" id="sensor6">
-             
-          </div>
-          <div class="col" id="sensor7">
-         
-          </div>
-          <div class="col" id="sensor8">
-            
-          </div>
+          <div class="col" id="sensor1"></div>
+          <div class="col" id="sensor2"></div>
+          <div class="col" id="sensor3"></div>
+          <div class="col" id="sensor4"></div>
+          <div class="col" id="sensor5"></div>
+          <div class="col" id="sensor6"></div>
+          <div class="col" id="sensor7"></div>
+          <div class="col" id="sensor8"></div>
         </div>
       </div>
     </main>
@@ -94,8 +79,7 @@
       <!-- place footer here -->
     </footer>
     <!-- Bootstrap JavaScript Libraries -->
-    <script src=
-"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
     <script src="./assets/js/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <script
@@ -109,7 +93,8 @@
       integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
       crossorigin="anonymous"
     ></script>
-
+    
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="./assets/js/date.js"></script>
   </body>
 </html>
