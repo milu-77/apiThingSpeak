@@ -37,7 +37,7 @@ function main() {
 }
 async function date1() {
   await fetch(
-    `https://api.thingspeak.com/channels/${channelId}/feeds.json?api_key=${apiKey}&results=500`
+    `https://api.thingspeak.com/channels/${channelId}/feeds.json?api_key=${apiKey}&results=100`
   )
     .then((response) => {
       if (!response.ok) throw Error(response.statusText);
