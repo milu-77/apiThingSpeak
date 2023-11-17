@@ -1,40 +1,232 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 
 <head>
-  <title>Title</title>
   <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- <link rel="shortcut icon" href="./assets/img/faviconV1.png" type="image/x-icon" /> -->
+  <link rel="shortcut icon" href="./assets/img/logo_milu_b.svg" type="image/x-icon" />
+  <title>Monitoreo</title>
   <!-- Bootstrap CSS v5.2.1 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous" />
+  <link rel="stylesheet" href="./assets/style/style.css" />
 </head>
 
 <body>
-  <header>
-    <!-- place navbar here -->
-  </header>
-  <main>
-
-  </main>
+  <!-- place navbar here -->
+  <div id="app">
+    <main>
+      <header class="container-fluid mb-3 d-flex   ">
+        <div class="container">
+          <ul class="nav justify-content-start">
+            <li class="nav-link p-2 text-uppercase fw-bolder">
+              <img src="./assets/img/logo.png" alt="" class="" />                                    
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link btn" href="./report.html">Reporte</a>
+            </li>
+          </ul>
+        </div>
+        <div class="container">
+          <ul class="nav justify-content-end">
+            <li class="nav-item p-2">
+              <a class="nav-link" href="#" aria-current="page"><i class="bi bi-bell-fill"></i></a>
+            </li>
+            <li class="nav-item p-2">
+              <a class="nav-link" href="#"><i class="bi bi-envelope-fill"></i></a>
+            </li>
+            <li class="nav-item p-2" id="title">
+              <div class="dropdown">
+                <button class="btn   dropdown-toggle" type=" button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  {{title}} <i class="bi bi-buildings"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" @click="logout">Sign Out</a></li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <div class="container shadow">
+        <div class="row ">
+          <div v-if="field1.length >= 5" class=" col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor1">
+            <div class="card radius-10 border-start border-0 border-3 border-info">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field1}}</p>
+                    <h4 class="my-1 text-info">{{field1[field1.length-1].field1}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[0]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[0]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[0]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[0]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id1" width="400" height="250"></canvas>
+                </div>
+                <!-- <div class="card-footer d-flex flex-row-reverse bd-highlight ">
+                  <button class="btn btn-primary ms-auto" @click="handleCardBodyClick(1)">Reporte</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div v-if="field2.length >= 5" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor2">
+            <div class="card radius-10 border-start border-0 border-3 border-warning ">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field2}}</p>
+                    <h4 class="my-1 text-info">{{field2[field2.length-1].field2}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[1]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[1]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[1]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[1]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id2" width="400" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="field3.length >= 5" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor3">
+            <div class="card radius-10 border-start border-0 border-3 border-danger ">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field3}}</p>
+                    <h4 class="my-1 text-info">{{field3[field3.length-1].field3}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[2]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[2]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[2]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[2]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id3" width="400" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="field4.length >= 5" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor4">
+            <div class="card radius-10 border-start border-0 border-3 border-success ">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field1}}</p>
+                    <h4 class="my-1 text-info">{{field4[field4.length-1].field4}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[3]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[3]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[3]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[3]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id4" width="400" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="field5.length >= 5" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor5">
+            <div class="card radius-10 border-start border-0 border-3 border-info">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field5}}</p>
+                    <h4 class="my-1 text-info">{{field5[field5.length-1].field5}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[4]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[4]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[4]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[4]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id5" width="400" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="field6.length >= 5" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor6">
+            <div class="card radius-10 border-start border-0 border-3 border-warning  ">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field6}}</p>
+                    <h4 class="my-1 text-info">{{field6[field6.length-1].field6}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[5]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[5]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[5]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[5]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id6" width="400" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="field7.length >= 5" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor7">
+            <div class="card radius-10 border-start border-0 border-3 border-danger  ">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field7}}</p>
+                    <h4 class="my-1 text-info">{{field7[field1.length-1].field7}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[6]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[6]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[6]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[6]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id7" width="400" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div v-if="field8.length >= 5" class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-4 " id="sensor8">
+            <div class="card radius-10 border-start border-0 border-3 border-success ">
+              <div class="card-body">
+                <div class="d-flex align-items-center">
+                  <div>
+                    <p class="mb-0 text-secondary">{{channel.field8}}</p>
+                    <h4 class="my-1 text-info">{{field8[field8.length-1].field8}} ° C</h4>
+                    <p class="mb-0 font-13">Max: {{maxs[7]}} °C</p>
+                    <p class="mb-0 font-13">Min: {{mins[7]}}°C</p>
+                    <p class="mb-0 font-13">Dispersion: {{dispersions[7]}}°C</p>
+                    <p class="mb-0 font-13">Promedio: {{averages[7]}}°C</p>
+                  </div>
+                </div>
+                <div>
+                  <canvas id="id8" width="400" height="250"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
   <footer>
     <!-- place footer here -->
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
-  <script src="./assets/js/popper.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
-
+    </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
-    <script src="./assets/js/date.js"></script>
-
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./assets/js/date.js"></script>
 </body>
 
 </html>
